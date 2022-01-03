@@ -202,6 +202,7 @@ class openHABSkill(MycroftSkill):
 
 	def handle_onoff_status_intent(self, message):
 		command = message.data.get('Command')
+		translate_command = self.translate_namedvalues('translate_command')
 		messageItem = message.data.get('Item')
 
 		#We have to find the item to update from our dictionaries
@@ -212,7 +213,8 @@ class openHABSkill(MycroftSkill):
 		ohItem = self.findItemName(self.lightingSwitchableItemsDic, messageItem)
 
 		if ohItem != None:
-			if (command != "on") and (command != "off"):
+			command = translate_command.get(command, "")
+			if command not in ("on", "off"):
 				self.speak_dialog('ErrorDialog')
 			else:
 				statusCode = self.sendCommandToItem(ohItem, command.upper())
