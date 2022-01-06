@@ -1,5 +1,3 @@
-# -*- coding: iso-8859-15 -*-
-
 #
 # Copyright (c) 2010-2019 Contributors to the openHAB project
 #
@@ -39,6 +37,7 @@ from rapidfuzz import fuzz
 __author__ = 'mortommy'
 
 LOGGER = getLogger(__name__)
+
 
 class openHABSkill(MycroftSkill):
 
