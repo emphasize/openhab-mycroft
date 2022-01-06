@@ -216,11 +216,10 @@ class openHABSkill(MycroftSkill):
 		ohItem = self.findItemName(self.lightingSwitchableItemsDic, messageItem)
 
 		if ohItem != None:
-			command = translate_command.get(command, "")
-			if command not in ("on", "off"):
+			if translate_command.get(command, "") not in ("on", "off"):
 				self.speak_dialog('ErrorDialog')
 			else:
-				statusCode = self.sendCommandToItem(ohItem, command.upper())
+				statusCode = self.sendCommandToItem(ohItem, translate_command.get(command, "").upper())
 				if statusCode == 200:
 					self.speak_dialog('StatusOnOff', {'command': command, 'item': messageItem})
 				elif statusCode == 404:
